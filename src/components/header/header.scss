@@ -1,0 +1,53 @@
+@import '../../constants/constants.scss';
+.header {
+  display: flex;
+  width: 1220px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  height: 100px;
+  margin: 0 auto;
+  .logo {
+    display: flex;
+    align-items: center;
+    color: $main-color;
+    font-size: 24px;
+    gap: 8px;
+    line-height: 0;
+    font-weight: 600;
+  }
+  & nav .navbar {
+    display: flex;
+    gap: 30px;
+    width: 600px;
+    &__item {
+      color: $main-color;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  .header__btns {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+  
+    .header__button {
+      width: 150px;
+      height: 43px;
+      background-color: $main-color;
+      color: #fff;
+      border-radius: 5px;
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+    }
+  }
+  .bars-menu {
+    display: none;
+  }
+}
+.stroke {
+  width: 100%;
+  border: .5px solid rgba(110, 120, 146, 1);
+  margin-bottom: 50px;
+}

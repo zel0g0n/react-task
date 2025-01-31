@@ -1,0 +1,45 @@
+@import '../../constants/constants.scss';
+.offer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  width: 1220px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 72px;
+    text-align: center;
+    color: $main-color;
+  }
+  
+  .floating-img {
+    img {
+      position: absolute;
+      &:nth-child(1){
+        bottom: 50px;
+        left: 200px;
+      }
+      &:nth-child(2){
+        bottom: 140px;
+        right: 200px;
+      }
+      &:nth-child(3){
+        top: 50px;
+        left: 50%;
+      }
+      &:nth-child(4){
+        top: 90px;
+        left: 20px;
+      }
+      &:nth-child(5){
+        top: 200px;
+        right: 30px;
+      }
+    }
+  }
+}
