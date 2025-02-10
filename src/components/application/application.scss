@@ -1,0 +1,66 @@
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+.application {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 570px;
+  overflow: hidden;
+  margin-bottom: 100px;
+  .circle__shape {
+    width: 120%;
+    height: 900px;
+    background-color: rgba(243, 247, 249, 1);
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: -10%;
+    z-index: -999;
+  }
+  & form {
+    width: 550px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .form__select , .form__inp , .form__btn{
+      height: 61px;
+      width: 100%;
+      padding: 20px;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      color: rgba(127, 138, 158, 1);
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .form__select {
+      background: white url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><polygon points='0,0 20,0 10,10' style='fill:%23000'/></svg>") no-repeat right 20px center;
+      background-size: 12px;
+      appearance: none;
+    }
+    .form__inp::placeholder {
+      color: rgba(127, 138, 158, 1);
+    }
+    .form__btn {
+      background-color: rgba(82, 84, 241, 1);
+      cursor: pointer;
+      color: #fff;
+    }
+   
+    
+  }
+}
