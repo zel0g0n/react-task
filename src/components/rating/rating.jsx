@@ -15,7 +15,7 @@ const Rating = ({ratingData, sortCount, sortTotal}) => {
           ratingData.counts ? (
             ratingData.counts.map((item,index) => (
               <div key={index} className='count__list'>
-                <div onClick={() => sortCount(item,index)} className='head'>
+                <div onClick={() => sortCount(item,item[0].category_id)} className='head'>
                   Category {index+1}
                   <i className="fa-solid fa-arrow-up-wide-short"></i>  
                 </div>

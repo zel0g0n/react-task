@@ -68,7 +68,7 @@ const App = () => {
   },[data])
 
   const sortCount = (arr, id) => {
-    let newData = [...ratingData.counts[id]].sort((a, b) => b.count - a.count);
+    let newData = [...ratingData.counts[id-1]].sort((a, b) => b.count - a.count);
     let sortedUsers = []
     newData.forEach(item => {
       sortedUsers.push(ratingData.user.filter(child => child.id == item.user_id)[0])
@@ -76,7 +76,7 @@ const App = () => {
     setRatingData((prev) => ({
       ...prev,
       user: sortedUsers,
-      counts: [...prev.counts.slice(0, id), newData, ...prev.counts.slice(id + 1)],
+      counts: [...prev.counts.slice(0, id-1), newData, ...prev.counts.slice(id)],
     }));
   };
   const sortTotal = () => {
@@ -101,14 +101,21 @@ const App = () => {
         return item
       }
     })
+    console.log(newData1)
+    let sortedUsers = []
+    let newData2 = [...newData1.sort((a, b) => b.count - a.count)]
+    newData2.forEach(item => {
+      sortedUsers.push(ratingData.user.filter(child => child.id == item.user_id)[0])
+    })
+     
     const [userCountTotal,userCountTotalValue] = sumTotal([...ratingData.counts.slice(0, cID - 1), newData1, ...ratingData.counts.slice(cID)])
     setRatingData((prev) => ({
       ...prev,
-      counts: [...prev.counts.slice(0, cID - 1), newData1, ...prev.counts.slice(cID)],
+      user: sortedUsers,
+      counts: [...prev.counts.slice(0, cID - 1), newData2, ...prev.counts.slice(cID)],
       userCountTotal: [...userCountTotal, {allTotal: userCountTotalValue}]
 
     }));
-    
 
   };
 
