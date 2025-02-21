@@ -13,6 +13,24 @@ const App = () => {
   const [data,setData] = useState({user: [],count: [], category: []})
   const [ratingData, setRatingData] = useState({})
   const {getData} = service()
+  const sumTotal = (arr) => {
+    let userCountTotal = []
+    let userCountTotalValue = 0
+    if(arr.length) {
+      for(let i=1; i<=20; i++) {
+        let sum = 0
+        arr.forEach((element) => {
+          sum+= (sumCount(element,i))
+        });
+        userCountTotal.push({userTotalSum: sum, id: i})
+      }
+      userCountTotal.forEach(element => {
+        userCountTotalValue+=element.userTotalSum
+      });
+      
+    }
+    return [userCountTotal,userCountTotalValue]
+  }
   useEffect(() => {
     let arr = []
     let filledCount = []
@@ -38,24 +56,9 @@ const App = () => {
         totalCountUsers.push({total})
       }
     }
-    let userCountTotal = []
-    let userCountTotalValue = 0
-    if(filledCount.length) {
-      for(let i=1; i<=20; i++) {
-        let sum = 0
-        filledCount.forEach((element) => {
-          sum+=(sumCount(element,i))
-        });
-        userCountTotal.push({userTotalSum: sum})
-      }
-      userCountTotal.forEach(element => {
-        userCountTotalValue+=element.userTotalSum
-      });
-      
-    }
     
+    const [userCountTotal,userCountTotalValue] = sumTotal(filledCount)
     if(data.user.length) {
-      
       setRatingData({
         user: [...(Array.isArray(data.user) ? data.user : []), { content: 'Общее' }],
         counts: filledCount,
@@ -66,35 +69,47 @@ const App = () => {
 
   const sortCount = (arr, id) => {
     let newData = [...ratingData.counts[id]].sort((a, b) => b.count - a.count);
+    let sortedUsers = []
+    newData.forEach(item => {
+      sortedUsers.push(ratingData.user.filter(child => child.id == item.user_id)[0])
+    })
     setRatingData((prev) => ({
       ...prev,
+      user: sortedUsers,
       counts: [...prev.counts.slice(0, id), newData, ...prev.counts.slice(id + 1)],
     }));
   };
   const sortTotal = () => {
     const newArr = [...ratingData.userCountTotal].sort((a,b) => (b.userTotalSum - a.userTotalSum))
-    setRatingData(prev => ({...prev, userCountTotal: newArr}))
+    let sortedUsers =  []
+    newArr.forEach((item) => {
+      sortedUsers.push(ratingData.user.filter(child => child.id == item.id)[0])
+    })
+    setRatingData(prev => ({...prev, user: sortedUsers, userCountTotal: newArr}))
   }
 
   const sumCount = (arr,id) => {
     const data = arr.filter(item => item.user_id == id)
     return data[0].count
-    
   }
 
   const updateCount = (cID, uID, count) => {
     let newData1 = ratingData.counts[cID - 1].map((item) => {
       if(item.user_id == uID) {
-        console.log("DONE")
-        return {...item, count}
+        return {...item, count: +count}
       }else {
         return item
       }
     })
+    const [userCountTotal,userCountTotalValue] = sumTotal([...ratingData.counts.slice(0, cID - 1), newData1, ...ratingData.counts.slice(cID)])
     setRatingData((prev) => ({
       ...prev,
       counts: [...prev.counts.slice(0, cID - 1), newData1, ...prev.counts.slice(cID)],
+      userCountTotal: [...userCountTotal, {allTotal: userCountTotalValue}]
+
     }));
+    
+
   };
 
 
