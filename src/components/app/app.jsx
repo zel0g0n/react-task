@@ -101,7 +101,6 @@ const App = () => {
         return item
       }
     })
-    console.log(newData1)
     let sortedUsers = []
     let newData2 = [...newData1.sort((a, b) => b.count - a.count)]
     newData2.forEach(item => {

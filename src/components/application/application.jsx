@@ -53,7 +53,7 @@ const Application = ({category, updateCount,user,ratingData}) => {
 
           ))}
         </select>
-        <input onChange={e => inputHandler(e)}  name='count' value={countC} type="number" placeholder='Count' className="form__inp" />
+        <input required onChange={e => inputHandler(e)}  name='count' value={countC} type="number" placeholder='Count' className="form__inp" />
         <button className="form__btn">SET</button>
       </form>
       <div className="circle__shape"></div>
